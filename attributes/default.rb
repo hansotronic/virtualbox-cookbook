@@ -23,8 +23,8 @@ default['virtualbox']['arch'] = node['kernel']['machine'] =~ /x86_64/ ? "amd64" 
 case node['platform']
 when "mac_os_x", "windows"
   default['virtualbox']['version'] = 'VirtualBox-4.2.4-81684'
-when "ubuntu","debian"
-  default['virtualbox']['version'] = "4.1"
+when "ubuntu","debian", "centos"
+  default['virtualbox']['version'] = "4.2"
 end
 
 default['virtualbox']['url'] = ""

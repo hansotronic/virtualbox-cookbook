@@ -24,6 +24,8 @@ when "mac_os_x"
   distfile = "-OSX.dmg"
 when "ubuntu","debian"
   distfile = "~#{node['platform'].capitalize}~#{node['lsb']['codename']}_#{node['virtualbox']['arch']}.deb"
+when "centos"
+  distfile = "_el6-1.x86_64.rpm"
 when "windows"
  distfile = "-Win.exe"
 end
@@ -72,4 +74,16 @@ when "ubuntu","debian"
 
   package "virtualbox-#{node['virtualbox']['version']}"
   package "dkms"
+
+when "centos"
+
+  cookbook_file "/etc/yum.repos.d/virtualbox.repo" do
+    source "virtualbox.repo"
+    mode 0644
+    owner "root"
+  end
+
+  package "VirtualBox-#{node['virtualbox']['version']}"
+  #package "dkms"
+
 end
